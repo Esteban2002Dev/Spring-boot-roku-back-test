@@ -1,8 +1,11 @@
 package com.esteban.roku_back_test.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 // import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 // import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,8 +28,16 @@ public class WelcomeController {
     }
 
     @GetMapping("/courses")
-    public String courses() {
-        return "courses";
+    @ResponseBody
+    public List<String> courses(
+        // @RequestParam(defaultValue = "ASC") String orderBy,
+        @RequestParam(required = false) List<String> categories
+    ) {
+        return categories;
+        // String message = "Listado de cursos";
+        // if (orderBy != null) message += " ordenado por: " + orderBy;
+        // if (category != null) message += " en la categoría: " + category;
+        // return message;
     }
 
     // // @GetMapping("/courses/{courseName}/{categoryName}")
