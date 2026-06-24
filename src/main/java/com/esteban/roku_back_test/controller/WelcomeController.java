@@ -3,6 +3,7 @@ package com.esteban.roku_back_test.controller;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 // import org.springframework.web.bind.annotation.ResponseBody;
 // import org.springframework.web.bind.annotation.RestController;
+
+import com.esteban.roku_back_test.model.User;
 
 
 @Controller
@@ -20,10 +23,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 // @RestController
 public class WelcomeController {
 
-    @GetMapping
     // @PostMapping // Para que el metodo sea llamado con un post en lugar de un get
     // @ResponseBody
-    public String welcome() {
+    @GetMapping
+    public String welcome(
+        // Para pasarle datos a la vista, podemos usar el objeto Model
+        // que es un objeto que nos permite pasarle datos a la vista. En este caso, le pasamos un atributo llamado "message" con el valor "Bienvenido a mi aplicación"
+        Model model
+    ) {
+        model.addAttribute("name", "Esteban");
+        model.addAttribute("user", new User("Esteban", "esteban@example.com"));
         return "welcome";
     }
 
