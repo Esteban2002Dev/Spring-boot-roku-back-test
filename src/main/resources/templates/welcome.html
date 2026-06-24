@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome</title>
+
+    <style>
+        .text-red {
+            color: red;
+        }
+        .text-blue {
+            color: blue;
+        }
+    </style>
 </head>
 <body>
     <!-- <h1 th:text="'Hola ' + ${name} + ', bienvenido!'"></h1> -->
@@ -11,7 +20,48 @@
         Hola [[${name}]], bienvenido!
     </h1>
 
-    <div th:object="${user}">
+    <!-- El contrario al if, si no se cumple la condicion cae aca (lo mismo que hacer un != en el if) -->
+    <p th:unless="${users.size()} == 0">
+        Listado de usuarios:
+    </p>
+    <ul>
+        <li
+            th:each="user, loop: ${users}"
+            th:object="${user}"
+            th:class="${loop.last ? 'text-red' : ''}"
+        >
+            <!--
+                th:class="${loop.first ? 'text-red' : ''}"
+                th:class="${loop.even ? 'text-red' : 'text-blue'}"
+                th:class="${loop.odd ? 'text-red' : 'text-blue'}"
+            -->
+            <p>
+                Usuario n° [[${loop.index + 1}]]
+            </p>
+            <p>
+                Nombre: [[*{name}]]
+            </p>
+            <p>
+                Email: [[*{email}]]
+            </p>
+        </li>
+
+        <!-- <li th:if="${users.size() == 0}">
+            <p>
+                No hay usuarios
+            </p>
+        </li> -->
+
+        <!-- Thymeleaf lets us use utility methods -->
+        <li th:if="${#lists.isEmpty(users)}">
+            <p>
+                No hay usuarios
+            </p>
+        </li>
+    </ul>
+    
+    
+    <!-- <div th:object="${user}">
         <p>
             Usuario
         </p>
@@ -21,6 +71,6 @@
         <p>
             Email: [[*{email}]]
         </p>
-    </div>
+    </div> -->
 </body>
 </html>

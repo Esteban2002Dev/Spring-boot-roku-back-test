@@ -31,8 +31,15 @@ public class WelcomeController {
         // que es un objeto que nos permite pasarle datos a la vista. En este caso, le pasamos un atributo llamado "message" con el valor "Bienvenido a mi aplicación"
         Model model
     ) {
+        // User firstUser = new User("Esteban", "esteban@example.com");
+        // User secondUser = new User("Jimenita", "jimenita@example.com");
+        // User thirdUser = new User("Leslie", "leslie@example.com");
+
+        // List<User> users = List.of(firstUser, secondUser, thirdUser);
+
+        List<User> users = List.of();
         model.addAttribute("name", "Esteban");
-        model.addAttribute("user", new User("Esteban", "esteban@example.com"));
+        model.addAttribute("users", users);
         return "welcome";
     }
 
